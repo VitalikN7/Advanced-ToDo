@@ -1,0 +1,46 @@
+@import 'mixin';
+
+.header {
+   padding-top: 20px;
+
+   .header_inner {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      font-family: 'quicksand';
+
+      .header_logo {
+         width: 70%;
+         font-weight: 600;
+         font-size: 40px;
+         text-decoration: none;
+         color: black;
+
+         @include hover
+      }
+
+      .header_nav {
+         width: 30%;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         font-weight: 300;
+         font-size: 20px;
+
+         .header_hello {
+            font-weight: 500;
+            cursor: default;
+            @include hover;
+
+            &:hover {
+               color: black;
+            }
+         }
+
+         .header_profile {
+            cursor: pointer;
+            @include hover;
+         }
+      }
+   }
+}

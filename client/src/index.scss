@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500,700&subset=cyrillic,cyrillic-ext');
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400,700');
+
+*,
+*::before,
+*::after {
+   box-sizing: border-box;
+}
+
+p {
+   margin: 0;
+   padding: 0;
+}
+
+body {
+   margin: 0;
+   padding: 0;
+   width: 100vw;
+   height: 100vh;
+   background-color: #8BC6EC;
+   background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+}
+
+// Анимация ToDo
+
+.todos-enter {
+   opacity: 0;
+}
+
+.todos-enter-active {
+   opacity: 1;
+   transition: opacity 500ms ease-in;
+}
+
+.todos-exit {
+   opacity: 1;
+}
+
+.todos-exit-active {
+   opacity: 0;
+   transition: opacity 500ms ease-in;
+}

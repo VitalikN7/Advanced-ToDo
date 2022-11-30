@@ -1,0 +1,47 @@
+.todos_list {
+   font-size: 1.4em;
+
+   .todo_user_and_like {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      .todo_data {
+         font-size: 16px;
+      }
+   }
+
+   .todo_item {
+      border-bottom: 2px solid #837c7c;
+      cursor: pointer;
+      line-height: 40px;
+      margin-bottom: 17px;
+
+      .todo_item__edit_button {
+         opacity: 0.5;
+         float: right;
+         text-align: center;
+         width: 40px;
+
+         &:hover {
+            opacity: 1;
+         }
+      }
+
+      .todo_item__delete_button {
+         opacity: 0.5;
+         float: right;
+         text-align: center;
+         width: 40px;
+
+         &:hover {
+            opacity: 1;
+         }
+      }
+   }
+
+   .disabled {
+      text-decoration: line-through;
+   }
+
+}

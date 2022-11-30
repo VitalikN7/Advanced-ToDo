@@ -1,0 +1,22 @@
+@mixin hover {
+   margin: 0px 0px;
+   padding: 0 2%;
+   text-decoration: none;
+   color: black;
+
+   &:visited {
+      color: black;
+   }
+
+   &:hover {
+      color: rgb(71, 71, 71);
+   }
+
+   &:last-child {
+      padding-right: 0px;
+   }
+
+   &:first-child {
+      padding-left: 0px;
+   }
+}
