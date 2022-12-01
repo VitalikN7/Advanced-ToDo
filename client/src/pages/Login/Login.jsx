@@ -1,19 +1,28 @@
-import { React, useState } from 'react'
+import { React } from 'react'
 import { Navigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUserlogin, selectIsAuth } from '../../redux/slice/authSlice'
 import styles from './Login_and_Register.module.scss'
 
 export const Login = () => {
 
-   const [val, setVal] = useState({ email: '', password: '' })
+   const {
+      register,
+      handleSubmit,
+      formState: { errors }
+   } = useForm({
+      defaultValues: {
+         email: '',
+         password: '',
+      }
+   });
+
    const dispatch = useDispatch()
    const isAuth = useSelector(selectIsAuth)
 
-   const getText = (e) => {
-      e.preventDefault()
-      dispatch(fetchUserlogin(val))
-      setVal({ email: '', password: '' })
+   const onSubmit = (data) => {
+      dispatch(fetchUserlogin(data))
    }
 
    if (isAuth) {
@@ -23,30 +32,29 @@ export const Login = () => {
    return (
       <>
          <div className={styles.wrapper}>
-            <form className={styles['form-signin']}>
+            <form className={styles['form-signin']} onSubmit={handleSubmit(onSubmit)}>
                <h2 className={styles['form-signin-heading']}>Авторизация</h2>
                <input
-                  value={val.email}
-                  onChange={(e) => setVal({ ...val, email: e.target.value })}
+                  {...register("email", { required: 'Укажите почту', })}
                   type="email"
                   className={styles['form-control']}
-                  name="email" placeholder="Email"
-                  required
+                  placeholder="Email"
                   autoFocus
                   autoComplete="off" />
+               {errors?.email?.type === "required" &&
+                  <p style={{ color: '#da4141' }}>Укажите почту</p>}
                <input
-                  value={val.password}
-                  onChange={(e) => setVal({ ...val, password: e.target.value })}
+                  {...register("password", { required: 'Укажите пароль' })}
                   type="password"
                   className={styles['form-control']}
-                  name="password"
                   placeholder="Password"
-                  required />
+                  autoComplete="off"
+               />
+               {errors.password && <p style={{ color: '#da4141' }}>Укажите пароль</p>}
                <label className={styles.checkbox}>
                   <input type="checkbox" defaultValue="remember-me" id="rememberMe" name="rememberMe" /> Запомнить меня
                </label>
                <button
-                  onClick={getText}
                   className={styles.btn}
                   type="submit">Войти</button>
             </form>

@@ -10,7 +10,7 @@ import { Button } from '../../components/Ul/Button/Button'
 import { Todos } from '../../components/Ul/Todos/Todos'
 import { Pagination } from '../../components/Ul/Pagination/Pagination'
 import { Modal } from '../../components/Modal/Modal';
-import { Spinners } from '../../components/Spinners/Spinners';
+import { Spinner } from '../../components/Spinner/Spinner';
 import {
    fetchAddTodo,
    fetchAllTodo,
@@ -203,7 +203,7 @@ export const Home = () => {
                      />
                   </>)
                   :
-                  (<Spinners />)
+                  (<Spinner />)
             }
          </main >
          <Modal active={modalActive} setActive={setModalActive}>
