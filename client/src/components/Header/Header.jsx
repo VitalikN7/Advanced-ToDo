@@ -26,7 +26,6 @@ export const Header = () => {
                   {isAuth ? (
                      <>
                         <p className={styles.header_hello}>{`Привет ${isUser.username}`}</p>
-                        <Link className={styles.header_profile} to="/profile">Личный кабинет</Link>
                         <p onClick={onClickLogout} className={styles.header_profile} >Выйти</p>
                      </>
                   ) : (

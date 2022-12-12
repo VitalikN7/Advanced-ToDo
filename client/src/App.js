@@ -8,7 +8,6 @@ import { Header } from "./components/Header/Header";
 import { Container } from './components/Ul/Container/Container';
 // Страницы
 import { Home } from "./pages/Home/Home";
-import { Profile } from "./pages/Profile/Profile";
 import { Login } from './pages/Login/Login'
 import { Registrasion } from './pages/Registrasion/Registrasion'
 
@@ -28,7 +27,6 @@ function App() {
       <Container>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
           <Route path="/register" element={<Registrasion />} />
           <Route path="/login" element={<Login />} />
         </Routes>

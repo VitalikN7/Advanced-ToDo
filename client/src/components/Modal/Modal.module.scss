@@ -13,11 +13,11 @@
    transition: 0.5s;
 
    .modal__content {
-      padding: 20px;
+      padding: 20px 25px;
       border-radius: 12px;
       background-color: #8BC6EC;
       background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
-      width: 50%;
+      width: 40%;
       transform: scale(0.5);
       transition: 0.4s all;
    }

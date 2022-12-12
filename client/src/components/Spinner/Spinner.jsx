@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from './Spinners.module.scss'
+import styles from './Spinner.module.scss'
 
-export const Spinners = () => {
+export const Spinner = () => {
    return (
       <div className={`${styles.container} ${styles['text-center']}`}>
          <div className={styles.row}>

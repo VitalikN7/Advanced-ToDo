@@ -1,16 +1,16 @@
 import { React, useState, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-   CSSTransition,
-   TransitionGroup,
-} from 'react-transition-group';
+// import {
+//    CSSTransition,
+//    TransitionGroup,
+// } from 'react-transition-group';
 import usePagination from '../../hooks/usePagination';
 import styles from './Home.module.scss'
 import { Button } from '../../components/Ul/Button/Button'
 import { Todos } from '../../components/Ul/Todos/Todos'
 import { Pagination } from '../../components/Ul/Pagination/Pagination'
 import { Modal } from '../../components/Modal/Modal';
-import { Spinners } from '../../components/Spinners/Spinners';
+import { Spinner } from '../../components/Spinner/Spinner';
 import {
    fetchAddTodo,
    fetchAllTodo,
@@ -33,9 +33,14 @@ export const Home = () => {
    // Проверка авторизации
    const isAuth = useSelector(selectIsAuth)
    // Создания туду
-   const [todo, setTodo] = useState('')
-   // Изменить туду
-   const [editTodo, setEditTodo] = useState('')
+   const [addTodo, setAddTodo] = useState({
+      todo: '',
+      editTodo: '',
+   })
+   const [isValid, setIsValid] = useState({
+      todo: false,
+      editTodo: false,
+   })
    // Вытащить id туду и изменить
    const [idTodo, setIdTodo] = useState(0)
    // Выполненая или невыполненая todo
@@ -58,32 +63,61 @@ export const Home = () => {
    // Модальное окно
    const [modalActive, setModalActive] = useState(false)
    // Создания туду
-   const getTodo = ((e) => {
+   const getTodo = (e) => {
       e.preventDefault()
-      if (todo !== '') {
+      const { todo } = addTodo
+      if (todo.length) {
          dispatch(fetchAddTodo({ todo }))
+         setIsValid({
+            ...isValid, todo: false
+         })
+         setAddTodo({
+            todo: '',
+            editTodo: '',
+         })
+      } else {
+         setIsValid({
+            ...isValid, todo: true
+         })
       }
-      setTodo('')
-   })
+   }
    // Изменить туду
-   const getEditTodo = async (e) => {
+   const getEdiTodo = (e) => {
       e.preventDefault()
-      if (editTodo !== '') {
+      const { editTodo } = addTodo
+      if (editTodo.length) {
          dispatch(fetchEditTodo({ editTodo, idTodo }))
+         setModalActive(false)
+         setIsValid({
+            ...isValid, editTodo: false
+         })
+         setAddTodo({
+            todo: '',
+            editTodo: '',
+         })
+      } else {
+         setIsValid({
+            ...isValid, editTodo: true
+         })
       }
-      setEditTodo('')
-      setModalActive(false)
    }
    // Отображение всех todo первый раз когда отображается страница
    useEffect(() => {
       dispatch(fetchAllTodo())
-   }, [dispatch, isTodos.addTodo, isTodos.editTodo])
+      console.log(1);
+   }, [dispatch])
    // Выполненая или невыполненая todo и добавление количество todo
    useEffect(() => {
       if (isTodos.allTodo !== undefined) {
          setChangeTodo(isTodos.allTodo)
       }
+      console.log(2);
    }, [isTodos.allTodo])
+
+   useEffect(() => {
+      dispatch(fetchAllTodo())
+      console.log(3);
+   }, [dispatch, isTodos.editTodo, isTodos.addTodo])
    // Измение выполненой todo
    const getClass = (id) => {
       const res = isTodos.allTodo.map((el, i) => {
@@ -130,6 +164,7 @@ export const Home = () => {
 
    useEffect(() => {
       getButton(clickName)
+      console.log(4);
    }, [getButton, clickName,])
 
    return (
@@ -139,17 +174,18 @@ export const Home = () => {
             <h3 className={styles.main_h3}>
                {`Всего задач: ${isTodos?.allTodo && isAuth ? isTodos?.allTodo?.length : 0}`}
             </h3>
-            <form className={styles.form}>
+            {isAuth && <form className={`${styles.form}`}>
                <input
-                  type="text"
-                  value={todo}
-                  onChange={(e) => setTodo(e.target.value)}
+                  value={addTodo.todo}
+                  onChange={e => setAddTodo({ ...addTodo, todo: e.target.value })}
                   className={styles.form_input}
                   placeholder="Добавить todo"
-                  autoFocus
+                  autoFocus={true}
+                  autoComplete='off'
                />
                <button onClick={getTodo} className={styles.form_button} type="submit" >➕</button>
-            </form>
+               {isValid.todo && <p className={styles.valid}>Напишите хотя бы что нибудь</p>}
+            </form>}
             {!localStorage.getItem('token') ? (
                <h1 className={styles.title}>Чтобы создать ToDo зарегистрируйтесь или авторизуйтесь</h1>
             ) :
@@ -164,6 +200,8 @@ export const Home = () => {
                               //    key={id}
                               //    timeout={500}
                               //    classNames='todos'
+                              //    mountOnEnter
+                              //    unmountOnExit
                               // >
                               <Todos
                                  key={id}
@@ -176,7 +214,7 @@ export const Home = () => {
                                  setActive={setModalActive}
                                  setIdTodo={setIdTodo}
                               />
-                              // { /* </CSSTransition> */ }
+                              // </CSSTransition>
                            )}
                         {/* </TransitionGroup> */}
                      </ul>
@@ -203,21 +241,22 @@ export const Home = () => {
                      />
                   </>)
                   :
-                  (<Spinners />)
+                  (<Spinner />)
             }
          </main >
          <Modal active={modalActive} setActive={setModalActive}>
             <form className={styles.modal}>
                <input
-                  value={editTodo}
-                  onChange={(e) => setEditTodo(e.target.value)}
+                  value={addTodo.editTodo}
+                  onChange={e => setAddTodo({ ...addTodo, editTodo: e.target.value })}
                   className={styles.input_modal}
                   placeholder="Изменить todo"
-                  type="text"
-                  autoFocus
+                  autoFocus={true}
+                  autoComplete='off'
                />
-               <button onClick={getEditTodo} className={styles.button_modal}>Изменить</button>
+               <button onClick={getEdiTodo} className={styles.button_modal}>Изменить</button>
             </form>
+            {isValid.editTodo && <p className={styles.valid}>Напишите хотя бы что нибудь</p>}
          </Modal>
       </>
    )
