@@ -10,12 +10,13 @@ export const Login = () => {
    const {
       register,
       handleSubmit,
-      formState: { errors }
+      formState: { errors, isValid }
    } = useForm({
       defaultValues: {
          email: '',
          password: '',
-      }
+      },
+      mode: 'onBlur',
    });
 
    const dispatch = useDispatch()
@@ -35,28 +36,39 @@ export const Login = () => {
             <form className={styles['form-signin']} onSubmit={handleSubmit(onSubmit)}>
                <h2 className={styles['form-signin-heading']}>Авторизация</h2>
                <input
-                  {...register("email", { required: 'Укажите почту', })}
+                  {...register("email", {
+                     required: {
+                        value: true,
+                        message: 'Укажите почту'
+                     },
+                  })}
                   type="email"
                   className={styles['form-control']}
                   placeholder="Email"
                   autoFocus
                   autoComplete="off" />
-               {errors?.email?.type === "required" &&
-                  <p style={{ color: '#da4141' }}>Укажите почту</p>}
+               {errors?.email && <p style={{ color: '#da4141' }}>{errors?.email?.message}</p>}
                <input
-                  {...register("password", { required: 'Укажите пароль' })}
+                  {...register("password", {
+                     required: {
+                        value: true,
+                        message: 'Укажите пароль'
+                     },
+                  })}
                   type="password"
                   className={styles['form-control']}
                   placeholder="Password"
                   autoComplete="off"
                />
-               {errors.password && <p style={{ color: '#da4141' }}>Укажите пароль</p>}
+               {errors?.password && <p style={{ color: '#da4141', marginBottom: '10px' }}>{errors?.password?.message}</p>}
                <label className={styles.checkbox}>
-                  <input type="checkbox" defaultValue="remember-me" id="rememberMe" name="rememberMe" /> Запомнить меня
+                  <input type="checkbox" defaultValue="remember-me" id="rememberMe" checked={true} /> Запомнить меня
                </label>
                <button
                   className={styles.btn}
-                  type="submit">Войти</button>
+                  type="submit"
+                  disabled={!isValid}
+               >Войти</button>
             </form>
          </div>
       </>
