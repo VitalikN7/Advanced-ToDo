@@ -18,7 +18,7 @@ Flux архитектура в частности **Redux**
 
 Стек библиотек: HTML, CSS, SCSS, JavaScript, Redux-Toolkit, React-Router-Dom, Axios,  React Hook Form.
 
-Функционал:
+`Функционал`:
 
 1. Аторизация.
 
