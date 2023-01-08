@@ -28,6 +28,7 @@ export const fetchEditTodo = createAsyncThunk('/fetchEditTodo', async (params) =
 const initialState = {
    addTodo: null,
    allTodo: [],
+   filterTodo: [],
    statusTodo: null,
    editTodo: null,
    statusAddTodo: 'loading',
@@ -41,8 +42,31 @@ export const todoSlice = createSlice({
    name: 'todo',
    initialState,
    reducers: {
-      statusItemAllTodo: (state, action) => {
+      statusItemAllTodo(state, action) {
          state.allTodo = action.payload
+      },
+      filterItemAllTodo(state, action) {
+         if (action.payload === 'allTodo') {
+            state.filterTodo = state.allTodo
+         }
+         if (action.payload === 'activeTodo') {
+            const activeTodo = state.allTodo.filter(el => {
+               return el.status !== true
+            })
+            state.filterTodo = activeTodo
+         }
+         if (action.payload === 'complitedTodo') {
+            const complitedTodo = state.allTodo.filter(el => {
+               return el.status === true
+            })
+            state.filterTodo = complitedTodo
+         }
+         if (action.payload === 'deleteTodo') {
+            const deleteTodo = state.allTodo.filter(el => {
+               return el.status !== true
+            })
+            state.filterTodo = deleteTodo
+         }
       }
    },
    extraReducers: {
@@ -119,5 +143,7 @@ export const todoSlice = createSlice({
 export const todoReducer = todoSlice.reducer
 
 export const { statusItemAllTodo } = todoSlice.actions
+
+export const { filterItemAllTodo } = todoSlice.actions
 
 export const selectAllTodo = state => state.todo

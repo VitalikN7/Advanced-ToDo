@@ -17,6 +17,7 @@ import {
    fetchAllTodoStatus,
    fetchEditTodo,
    fetchTodoDelete,
+   filterItemAllTodo,
    statusItemAllTodo
 } from '../../redux/slice/todoSlice'
 import { selectAllTodo } from '../../redux/slice/todoSlice';
@@ -45,7 +46,7 @@ export const Home = () => {
    const [idTodo, setIdTodo] = useState(0)
    // Выполненая или невыполненая todo
    const [changeTodo, setChangeTodo] = useState([])
-   const [clickName, setclickName] = useState([])
+   const [clickName, setclickName] = useState('')
    // Пагинация   
    const {
       firstContentIndex,
@@ -104,19 +105,16 @@ export const Home = () => {
    // Отображение всех todo первый раз когда отображается страница
    useEffect(() => {
       dispatch(fetchAllTodo())
-      console.log(1);
    }, [dispatch])
    // Выполненая или невыполненая todo и добавление количество todo
    useEffect(() => {
       if (isTodos.allTodo !== undefined) {
          setChangeTodo(isTodos.allTodo)
       }
-      console.log(2);
    }, [isTodos.allTodo])
 
    useEffect(() => {
       dispatch(fetchAllTodo())
-      console.log(3);
    }, [dispatch, isTodos.editTodo, isTodos.addTodo])
    // Измение выполненой todo
    const getClass = (id) => {
@@ -137,35 +135,17 @@ export const Home = () => {
       dispatch(fetchTodoDelete(id))
    }
    // Фильтрация ToDo
-   const getButton = useCallback((click) => {
-
-      if (click === 'allTodo') {
-         setChangeTodo(isTodos.allTodo)
-      }
-      if (click === 'activeTodo') {
-         const activeTodo = isTodos.allTodo.filter(el => {
-            return el.status !== true
-         })
-         setChangeTodo(activeTodo)
-      }
-      if (click === 'complitedTodo') {
-         const complitedTodo = isTodos.allTodo.filter(el => {
-            return el.status === true
-         })
-         setChangeTodo(complitedTodo)
-      }
-      if (click === 'deleteTodo') {
-         const deleteTodo = isTodos.allTodo.filter(el => {
-            return el.status !== true
-         })
-         setChangeTodo(deleteTodo)
-      }
-   }, [isTodos.allTodo])
+   useEffect(() => {
+      setChangeTodo(isTodos.filterTodo)
+   }, [isTodos.filterTodo])
 
    useEffect(() => {
-      getButton(clickName)
-      console.log(4);
-   }, [getButton, clickName,])
+      getButtonFilter(clickName)
+   }, [clickName])
+
+   const getButtonFilter = (click) => {
+      dispatch(filterItemAllTodo(click))
+   }
 
    return (
       <>
