@@ -34,4 +34,5 @@ Flux архитектура в частности **Redux**
 
 7. Приятный визуал.
 
+![logo]: https://github.com/VitalikN7/Advanced-ToDo/blob/main/client/public/image/main.png?raw=true
 
