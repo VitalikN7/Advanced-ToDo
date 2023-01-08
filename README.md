@@ -36,6 +36,6 @@ Flux архитектура в частности **Redux**
 
 ![logo]: https://github.com/VitalikN7/Advanced-ToDo/blob/main/client/public/image/main.png?raw=true
 
-<img src="https://github.com/VitalikN7/Advanced-ToDo/blob/main/client/public/image/main.png?raw=true" width="200" height="50"/>
+<img src="https://github.com/VitalikN7/Advanced-ToDo/blob/main/client/public/image/main.png?raw=true" width="1200" height="100%"/>
 
 
