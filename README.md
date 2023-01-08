@@ -28,8 +28,9 @@ Flux архитектура в частности **Redux**.
 8. Валидация форм ввода данных.
 9. Разработал собственный React хук (usePagination).
 10. Настроил маршрутизацию через React-Router-Dom.
-11. Пользовался такими методами для запросов как: **GET, POST, PATCH, DELETE**.
-12. Приятный визуал.
+11. Сделал анимацию через React-Transition-Group.
+12. Пользовался такими методами для запросов как: **GET, POST, PATCH, DELETE**.
+13. Приятный визуал.
 
 <img src="https://github.com/VitalikN7/Advanced-ToDo/blob/main/client/public/image/main.png?raw=true" width="1200" height="100%" alt="main"/>
 <img src="https://github.com/VitalikN7/Advanced-ToDo/blob/main/client/public/image/module.png?raw=true" width="1200" height="100%" alt="module"/>
