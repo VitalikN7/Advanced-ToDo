@@ -20,12 +20,16 @@ Flux архитектура в частности **Redux**.
 
 1. Аторизация.
 2. ToDo привязаны к пользователю у каждого свои.
-3. Можно завершить или удалить Todo.
-4. Изменение Todo через модальное окно.
-5. Фильтрация (не)выполненых Todo.
-6. Пагинация для списка всех задач.
-7. Валидация форм ввода данных.
-8. Приятный визуал.
+3. Настроил Interceptors в Axios.
+4. Можно завершить или удалить Todo.
+5. Изменение Todo через модальное окно.
+6. Фильтрация (не)выполненых Todo.
+7. Пагинация для списка всех задач.
+8. Валидация форм ввода данных.
+9. Разработал собственный React хук (usePagination).
+10. Настроил маршрутизацию через React-Router-Dom.
+11. Пользовался такими методами для запросов как: **GET, POST, PATCH, DELETE**.
+12. Приятный визуал.
 
 <img src="https://github.com/VitalikN7/Advanced-ToDo/blob/main/client/public/image/main.png?raw=true" width="1200" height="100%" alt="main"/>
 <img src="https://github.com/VitalikN7/Advanced-ToDo/blob/main/client/public/image/module.png?raw=true" width="1200" height="100%" alt="module"/>
