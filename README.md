@@ -2,16 +2,16 @@
 
 - **Backend**
 
-База данных **PostgreSQL**
-Авторизация **JSON Web Token**
-ORM **Sequelize**
+База данных **PostgreSQL** \
+Авторизация **JSON Web Token** \
+ORM **Sequelize** \
 **Express** - фреймворк веб-приложений **Node.js**
 
 Стек библиотек: Node.js, Express, JavaScript, ООП, PostgreSQL, JWT, Sequelize ORM, Bcrypt.
 
 - **Frontend**
 
-Фреймворк **React**
+Фреймворк **React** \
 Flux архитектура в частности **Redux**
 
 Стек библиотек: HTML, CSS, SCSS, JavaScript, React, Redux-Toolkit, React-Router-Dom, Axios, React-Transition-Group, React Hook Form.
